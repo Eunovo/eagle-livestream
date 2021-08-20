@@ -1,4 +1,27 @@
+:root {
+    --primary: #1e90ff;
+    --primary-light: #2e91ff;
+    --primary-dark: #2e91ff;
+    --background: #282c34;
+    --gap-sm: 0.5rem;
+}
+
 .container {
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.link-primary {
+    color: var(--primary);
+    transition: color ease-in-out 100ms;
+}
+
+.link-primary:hover {
+    color: var(--primary-light);
+}
+
+@media screen and (min-width: 750px) {
+    :root {
+        
+    }
 }

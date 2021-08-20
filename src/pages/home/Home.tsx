@@ -5,7 +5,7 @@ export const Home = () => {
     return <div className='container home'>
         <Header />
 
-        <div>
+        <div className='home__main'>
 
         </div>
     </div>

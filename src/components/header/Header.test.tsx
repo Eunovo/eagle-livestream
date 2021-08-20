@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { AppContext } from '../../state/AppContext';
 import { Header } from './Header';
 
 test('Header shows auth links when user is logged out', () => {
-    render(<AppContext.Provider value={{}}>
-        <Header />
-    </AppContext.Provider>);
+    render(<Router>
+        <AppContext.Provider value={{}}>
+            <Header />
+        </AppContext.Provider>
+    </Router>);
 
     const loginEl = screen.getByText('Login');
     const signupEl = screen.getByText('Signup');
