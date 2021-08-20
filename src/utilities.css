@@ -7,6 +7,7 @@
     --bg-x-light: #d4d5d6;
     --bg-input: #53565d;
     --gap-sm: 0.5rem;
+    --screen-md: 768px;
 }
 
 *, *:before, *:after {
@@ -71,7 +72,7 @@ button {
     color: var(--bg-x-light);
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: var(--screen-md)) {
     :root {
         
     }
