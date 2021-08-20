@@ -2,8 +2,15 @@
     --primary: #1e90ff;
     --primary-light: #2e91ff;
     --primary-dark: #2e91ff;
-    --background: #282c34;
+    --bg-color: #282c34;
+    --bg-light: #3d4148;
+    --bg-x-light: #d4d5d6;
+    --bg-input: #53565d;
     --gap-sm: 0.5rem;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
 }
 
 .container {
@@ -18,6 +25,50 @@
 
 .link-primary:hover {
     color: var(--primary-light);
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid var(--bg-input);
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    color: white;
+    background-color: var(--bg-input) !important;
+    outline: none !important;
+    transition: border 100ms ease-in-out
+        box-shadow 100ms ease-in-out;
+}
+
+input:focus, input:hover {
+    box-shadow: 0 0 4px 2px var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.input__error {
+    color: red;
+    font-size: 0.7rem;
+    text-align: left;
+}
+
+button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.btn-primary {
+    color: white;
+    background-color: var(--primary);
+}
+
+.text-small {
+    font-size: 0.8rem;
+    color: var(--bg-x-light);
 }
 
 @media screen and (min-width: 750px) {
