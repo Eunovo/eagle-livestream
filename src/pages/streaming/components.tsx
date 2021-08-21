@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { CircularProgress, IconButton, Typography } from '@material-ui/core';
+import { CircularProgress, IconButton, Tooltip, Typography } from '@material-ui/core';
 import Mic from '@material-ui/icons/Mic';
 import MicOff from '@material-ui/icons/MicOff';
 import ScreenShare from '@material-ui/icons/ScreenShare';
@@ -17,67 +17,73 @@ export interface ToggleProps {
 export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
     const [on, setOn] = useState(true);
 
-    return <IconButton
-        className={clsx('icon-btn', { 'icon-btn--on': on })}
-        onClick={() => setOn((on) => {
-            if (on) {
-                broadcastService.disableVideo();
-                return false;
-            } else {
-                broadcastService.enableVideo();
-                return true;
+    return <Tooltip title={on ? 'Turn off camera' : 'Turn on camera'}>
+        <IconButton
+            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            onClick={() => setOn((on) => {
+                if (on) {
+                    broadcastService.disableVideo();
+                    return false;
+                } else {
+                    broadcastService.enableVideo();
+                    return true;
+                }
+            })}
+        >
+            {!on
+                ? <Videocam />
+                : <VideocamOff />
             }
-        })}
-    >
-        {!on
-            ? <Videocam />
-            : <VideocamOff />
-        }
-    </IconButton>;
+        </IconButton>
+    </Tooltip>;
 }
 
 export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) => {
     const [on, setOn] = useState(true);
 
-    return <IconButton
-        className={clsx('icon-btn', { 'icon-btn--on': on })}
-        onClick={() => setOn((on) => {
-            if (on) {
-                broadcastService.disableMic();
-                return false;
-            } else {
-                broadcastService.enableMic();
-                return true;
+    return <Tooltip title={on ? 'Turn off mic' : 'Turn on mic'}>
+        <IconButton
+            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            onClick={() => setOn((on) => {
+                if (on) {
+                    broadcastService.disableMic();
+                    return false;
+                } else {
+                    broadcastService.enableMic();
+                    return true;
+                }
+            })}
+        >
+            {!on
+                ? <Mic />
+                : <MicOff />
             }
-        })}
-    >
-        {!on
-            ? <Mic />
-            : <MicOff />
-        }
-    </IconButton>;
+        </IconButton>
+    </Tooltip>;
 }
 
 export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) => {
     const [on, setOn] = useState(false);
 
-    return <IconButton
-        className={clsx('icon-btn', { 'icon-btn--on': on })}
-        onClick={() => setOn((on) => {
-            if (on) {
-                // broadcastService.disableMic();
-                return false;
-            } else {
-                // broadcastService.enableMic();
-                return true;
+    return <Tooltip title={on ? 'Stop presenting screen' : 'Present screen'}>
+        <IconButton
+            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            onClick={() => setOn((on) => {
+                if (on) {
+                    broadcastService.unshareScreen();
+                    return false;
+                } else {
+                    broadcastService.shareScreen();
+                    return true;
+                }
+            })}
+        >
+            {!on
+                ? <ScreenShare />
+                : <StopScreenShare />
             }
-        })}
-    >
-        {!on
-            ? <ScreenShare />
-            : <StopScreenShare />
-        }
-    </IconButton>;
+        </IconButton>
+    </Tooltip>;
 }
 
 export interface ConnectionStatusProps {
