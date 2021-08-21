@@ -25,13 +25,13 @@ export const Broadcast: React.FC = () => {
     const user = {};
 
     return <div className='stream-view'>
-        
+
         <UserCount userObserver={serviceRef.current} />
         <ConnectionStatus connectionObserver={serviceRef.current} />
 
         <AgoraVideo
             className='stream-view__video'
-            videoTrack={serviceRef.current.getVideoTrack()}
+            videoTrack={serviceRef.current.currentVideoTrack}
         />
 
         <ul className='container stream-view__menu'>
