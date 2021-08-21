@@ -1,13 +1,13 @@
 import clsx from 'clsx';
-import { useState } from 'react';
-import { IconButton } from '@material-ui/core';
+import { useEffect, useState } from 'react';
+import { CircularProgress, IconButton } from '@material-ui/core';
 import Mic from '@material-ui/icons/Mic';
 import MicOff from '@material-ui/icons/MicOff';
 import ScreenShare from '@material-ui/icons/ScreenShare';
 import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
-import { IBroadcastService } from '../../streaming';
+import { IBroadcastService, IConnectionObserver, Status } from '../../streaming';
 
 export interface ToggleProps {
     broadcastService: IBroadcastService
@@ -77,4 +77,24 @@ export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) =
             : <StopScreenShare />
         }
     </IconButton>;
+}
+
+export interface ConnectionStatusProps {
+    connectionObserver: IConnectionObserver
+}
+
+export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ connectionObserver }) => {
+    const [status, setStatus] = useState<Status>(connectionObserver.getConnectionStatus());
+
+    useEffect(() => connectionObserver
+        .onConnectionStatusChanged((newStatus) => setStatus(newStatus)),
+        []);
+
+    return <div className={clsx('conn-status', `conn-status--${status}`)}>
+        {
+            status === Status.CONNECTING &&
+                <CircularProgress size={20} style={{ marginRight: '0.5rem' }} />
+        }
+        {status}
+    </div>
 }

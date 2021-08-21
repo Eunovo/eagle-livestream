@@ -1,11 +1,9 @@
-import AgoraRTC, { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, UID } from "agora-rtc-sdk-ng";
-import { IBroadcastService } from "../IStreamService";
+import AgoraRTC, { ConnectionState, IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, UID } from "agora-rtc-sdk-ng";
+import { IConnectionObserver, IUserObserver, Status } from "../IStreamService";
 
-export class AgoraBroadcastService implements IBroadcastService {
+export class AgoraService implements IConnectionObserver, IUserObserver {
 
     private uid: Promise<UID>;
-    private localVideoTrack: Promise<ILocalVideoTrack>;
-    private localAudioTrack: Promise<ILocalAudioTrack>;
 
     constructor(
         private client: IAgoraRTCClient,
@@ -19,49 +17,42 @@ export class AgoraBroadcastService implements IBroadcastService {
         this.uid = this.client.join(
             appId, this.channel, token, null);
         this.client.setClientRole('host');
-        this.localVideoTrack = AgoraRTC.createCameraVideoTrack();
-        this.localAudioTrack = AgoraRTC.createMicrophoneAudioTrack();
     }
 
-    async start() {
-        this.client.publish([
-            await this.localAudioTrack,
-            await this.localVideoTrack
-        ]);
+    getClient() {
+        return this.client;
     }
 
-    stop(): Promise<void> {
+
+    getConnectionStatus(): Status {
+        return this.mapToStatus(this.client.connectionState);
+    }
+
+    private mapToStatus(status: ConnectionState): Status {
+        return {
+            CONNECTED: Status.LIVE,
+            CONNECTING: Status.CONNECTING,
+            DISCONNECTED: Status.DISCONNECTED,
+            RECONNECTING: Status.CONNECTING,
+            DISCONNECTING: Status.CONNECTING
+        }[status];
+    }
+
+    onConnectionStatusChanged(listener: (newStatus: Status, oldStatus: Status) => void): () => void {
+        this.client.on('connection-state-change', (curState, prevState) => {
+            listener(
+                this.mapToStatus(curState), this.mapToStatus(prevState));
+        });
+
+        return () => { this.client.off('connection-state-change', listener); }
+    }
+
+    onUserAdded(listener: () => void): () => void {
         throw new Error("Method not implemented.");
     }
 
-    async enableMic() {
-        (await this.localAudioTrack).setEnabled(true);
-    }
-
-    async disableMic() {
-        (await this.localAudioTrack).setEnabled(false);
-    }
-
-    async enableVideo() {
-        (await this.localVideoTrack).setEnabled(true);
-    }
-
-    async disableVideo() {
-        (await this.localVideoTrack).setEnabled(false);
-    }
-
-    shareScreen(): Promise<void> {
+    onUserRemoved(listener: () => void): () => void {
         throw new Error("Method not implemented.");
-    }
-    onUserAdded(listener: () => void): void {
-        throw new Error("Method not implemented.");
-    }
-    onUserRemoved(listener: () => void): void {
-        throw new Error("Method not implemented.");
-    }
-
-    getVideoTrack() {
-        return this.localVideoTrack;
     }
 
 }

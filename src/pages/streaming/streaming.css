@@ -42,3 +42,20 @@
 .stream-view .icon-btn--on {
     background-color: red !important;
 }
+
+.conn-status {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: var(--bg-color);
+}
+
+.conn-status--LIVE {
+    background-color: red;
+}

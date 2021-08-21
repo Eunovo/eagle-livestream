@@ -3,7 +3,7 @@ import AgoraRTC, { IAgoraRTCClient } from "agora-rtc-sdk-ng";
 import { Typography } from "@material-ui/core";
 import { CopyButton } from "../../components/CopyButton";
 import { AgoraBroadcastService, AgoraVideo } from "../../streaming";
-import { ToggleCamera, ToggleMicrophone, ToggleScreenShare } from "./components";
+import { ConnectionStatus, ToggleCamera, ToggleMicrophone, ToggleScreenShare } from "./components";
 import "./streaming.css";
 
 
@@ -19,6 +19,8 @@ export const Broadcast: React.FC = () => {
     const user = {};
 
     return <div className='stream-view'>
+
+        <ConnectionStatus connectionObserver={serviceRef.current} />
 
         <AgoraVideo
             className='stream-view__video'
