@@ -48,11 +48,19 @@ export class AgoraService implements IConnectionObserver, IUserObserver {
     }
 
     onUserAdded(listener: () => void): () => void {
-        throw new Error("Method not implemented.");
+        this.client.on('user-joined', () => {
+            listener();
+        });
+
+        return () => this.client.off('user-joined', listener);
     }
 
     onUserRemoved(listener: () => void): () => void {
-        throw new Error("Method not implemented.");
+        this.client.on('user-left', () => {
+            listener();
+        });
+
+        return () => this.client.off('user-left', listener);
     }
 
 }
