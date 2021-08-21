@@ -1,0 +1,10 @@
+.stream-view {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.stream-view__video {
+    flex-grow: 1;
+    margin: 2rem 0;
+}
