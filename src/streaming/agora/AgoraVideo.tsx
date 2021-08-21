@@ -1,6 +1,6 @@
 import { ILocalVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { useEffect, useRef, useState } from "react"
-import { Observable } from "../../Observable";
+import { Observable, useObservable } from "../../Observable";
 
 export interface AgoraVideoProps {
     className?: string
@@ -9,11 +9,7 @@ export interface AgoraVideoProps {
 
 export const AgoraVideo: React.FC<AgoraVideoProps> = ({ className, videoTrack }) => {
     const vidContainer = useRef<HTMLDivElement | null>(null);
-    const [track, setTrack] = useState<IRemoteVideoTrack | ILocalVideoTrack | null>(null);
-
-    useEffect(() => {
-        return videoTrack.subscribe((value) => setTrack(value));
-    }, [vidContainer, videoTrack]);
+    const track = useObservable<IRemoteVideoTrack | ILocalVideoTrack | null>(videoTrack);
 
     useEffect(() => {
         if (!track) return;
