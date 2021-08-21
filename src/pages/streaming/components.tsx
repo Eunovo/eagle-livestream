@@ -1,7 +1,10 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import Mic from '@material-ui/icons/Mic';
 import MicOff from '@material-ui/icons/MicOff';
+import ScreenShare from '@material-ui/icons/ScreenShare';
+import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
 import { IBroadcastService } from '../../streaming';
@@ -14,6 +17,7 @@ export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
     const [on, setOn] = useState(true);
 
     return <IconButton
+        className={clsx('icon', { 'icon--on': !on })}
         onClick={() => setOn((on) => {
             if (on) {
                 broadcastService.disableVideo();
@@ -25,8 +29,8 @@ export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
         })}
     >
         {!on
-            ? <Videocam htmlColor='white' />
-            : <VideocamOff htmlColor='red' />
+            ? <Videocam />
+            : <VideocamOff />
         }
     </IconButton>;
 }
@@ -35,6 +39,7 @@ export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) =>
     const [on, setOn] = useState(true);
 
     return <IconButton
+        className={clsx('icon', { 'icon--on': !on })}
         onClick={() => setOn((on) => {
             if (on) {
                 broadcastService.disableMic();
@@ -46,8 +51,30 @@ export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) =>
         })}
     >
         {!on
-            ? <Mic htmlColor='white' />
-            : <MicOff htmlColor='red' />
+            ? <Mic />
+            : <MicOff />
+        }
+    </IconButton>;
+}
+
+export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) => {
+    const [on, setOn] = useState(false);
+
+    return <IconButton
+        className={clsx('icon', { 'icon--on': !on })}
+        onClick={() => setOn((on) => {
+            if (on) {
+                // broadcastService.disableMic();
+                return false;
+            } else {
+                // broadcastService.enableMic();
+                return true;
+            }
+        })}
+    >
+        {!on
+            ? <ScreenShare />
+            : <StopScreenShare />
         }
     </IconButton>;
 }

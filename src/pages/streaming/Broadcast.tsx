@@ -1,27 +1,29 @@
+import { useEffect, useRef } from "react";
 import AgoraRTC, { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import { Header } from "../../components/header";
-import { AgoraBroadcastService, AgoraVideo } from "../../streaming";
-import { ToggleCamera, ToggleMicrophone } from "./components";
+import { AgoraBroadcastService, AgoraVideo, IBroadcastService } from "../../streaming";
+import { ToggleCamera, ToggleMicrophone, ToggleScreenShare } from "./components";
 import "./streaming.css";
 
 const client: IAgoraRTCClient = AgoraRTC
     .createClient({ mode: "live", codec: "vp8" });
-const broadcastService = new AgoraBroadcastService(client);
+
 
 export const Broadcast: React.FC = () => {
+    const serviceRef = useRef(
+        new AgoraBroadcastService(client, 'test_channel'));
     const user = {};
 
-    return <div className='container stream-view'>
-        <Header />
-        
+    return <div className='stream-view'>
+
         <AgoraVideo
             className='stream-view__video'
-            videoTrack={broadcastService.getVideoTrack()}
+            videoTrack={serviceRef.current.getVideoTrack()}
         />
 
         <ul className='stream-view__menu'>
-            <li><ToggleMicrophone broadcastService={broadcastService} /></li>
-            <li><ToggleCamera broadcastService={broadcastService} /></li>
+            <li><ToggleMicrophone broadcastService={serviceRef.current} /></li>
+            <li><ToggleCamera broadcastService={serviceRef.current} /></li>
+            <li><ToggleScreenShare broadcastService={serviceRef.current} /></li>
         </ul>
     </div>
 }

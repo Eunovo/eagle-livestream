@@ -2,7 +2,7 @@
  * 
  */
 export interface IBroadcastService {
-    start(): Promise<string>
+    start(): Promise<void>
     stop(): Promise<void>
     enableMic(): Promise<void>
     disableMic(): Promise<void>
