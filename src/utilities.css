@@ -19,6 +19,10 @@
     padding-right: 1rem;
 }
 
+.bg-dark {
+    background-color: var(--bg-color);
+}
+
 .link-primary {
     color: var(--primary);
     transition: color ease-in-out 100ms;

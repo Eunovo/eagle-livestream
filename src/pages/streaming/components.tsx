@@ -17,7 +17,7 @@ export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
     const [on, setOn] = useState(true);
 
     return <IconButton
-        className={clsx('icon', { 'icon--on': !on })}
+        className={clsx('icon-btn', { 'icon-btn--on': on })}
         onClick={() => setOn((on) => {
             if (on) {
                 broadcastService.disableVideo();
@@ -39,7 +39,7 @@ export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) =>
     const [on, setOn] = useState(true);
 
     return <IconButton
-        className={clsx('icon', { 'icon--on': !on })}
+        className={clsx('icon-btn', { 'icon-btn--on': on })}
         onClick={() => setOn((on) => {
             if (on) {
                 broadcastService.disableMic();
@@ -61,7 +61,7 @@ export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) =
     const [on, setOn] = useState(false);
 
     return <IconButton
-        className={clsx('icon', { 'icon--on': !on })}
+        className={clsx('icon-btn', { 'icon-btn--on': on })}
         onClick={() => setOn((on) => {
             if (on) {
                 // broadcastService.disableMic();

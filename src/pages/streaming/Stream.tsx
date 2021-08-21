@@ -3,7 +3,7 @@ import { Header } from "../../components/header";
 import "./streaming.css";
 
 export const Stream: React.FC = () => {
-    const { channelId } = useParams<{ channelId: string }>();
+    const { channel } = useParams<{ channel: string }>();
 
     return <div className='stream-view'>
         <Header />

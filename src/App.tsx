@@ -14,7 +14,7 @@ function App() {
           <Switch>
             <Route path='/login'><Login /></Route>
             <Route path='/broadcast'><Broadcast /></Route>
-            <Route path='/join/:channelId'><Stream /></Route>
+            <Route path='/join/:channel'><Stream /></Route>
             <Route path='/'><Home /></Route>
           </Switch>
         </div>

@@ -12,7 +12,8 @@
 
 .stream-view__menu {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     list-style: none;
     background-color: var(--bg-light);
     margin: 0;
@@ -24,11 +25,20 @@
     margin-left: var(--gap-sm);
 }
 
-.stream-view .icon {
-    color: white;
-    background-color: red !important;
+.link-container {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 0 var(--gap-sm);
+    background-color: var(--bg-color);
 }
 
-.stream-view .icon--on {
+.stream-view .icon-btn {
+    color: white;
     background-color: var(--bg-color) !important;
+}
+
+.stream-view .icon-btn--on {
+    background-color: red !important;
 }
