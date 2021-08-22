@@ -15,11 +15,12 @@ export const Stream: React.FC = () => {
     );
 
     useEffect(() => {
-        serviceRef.current.join();
+        const service = serviceRef.current;
+        service.join();
         return () => {
-            serviceRef.current.leave();
+            service.leave();
         }
-    }, [serviceRef.current]);
+    }, []);
 
     return <div className='stream-view'>
         <UserCount userObserver={serviceRef.current} />

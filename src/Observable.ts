@@ -12,7 +12,7 @@ export class Observable<T> {
         this.subscribers = [...this.subscribers, listener];
         return () => {
             this.subscribers = this.subscribers
-                .filter((value) => value != listener);
+                .filter((value) => value !== listener);
         }
     }
 }

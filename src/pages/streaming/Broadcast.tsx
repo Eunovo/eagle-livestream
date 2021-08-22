@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import AgoraRTC, { IAgoraRTCClient } from "agora-rtc-sdk-ng";
+import AgoraRTC from "agora-rtc-sdk-ng";
 import { AgoraBroadcastService, AgoraVideo } from "../../streaming";
 import {
     ConnectionStatus,
@@ -23,10 +23,11 @@ export const Broadcast: React.FC = () => {
         )
     );
     useEffect(() => {
+        const service = serviceRef.current;
         return () => {
-            serviceRef.current.destroy();
+            service.destroy();
         }
-    }, [serviceRef.current]);
+    }, []);
 
     return <div className='stream-view'>
 

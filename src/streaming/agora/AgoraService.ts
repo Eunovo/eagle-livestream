@@ -1,4 +1,4 @@
-import AgoraRTC, { ConnectionState, IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, UID } from "agora-rtc-sdk-ng";
+import { ConnectionState, IAgoraRTCClient, UID } from "agora-rtc-sdk-ng";
 import { IConnectionObserver, IUserObserver, Status } from "../IStreamService";
 
 export class AgoraService implements IConnectionObserver, IUserObserver {

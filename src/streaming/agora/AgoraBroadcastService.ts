@@ -1,4 +1,4 @@
-import AgoraRTC, { ConnectionState, IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack, UID } from "agora-rtc-sdk-ng";
+import AgoraRTC, { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { Observable } from "../../Observable";
 import { IBroadcastService } from "../IStreamService";
 import { AgoraService } from "./AgoraService";

@@ -165,7 +165,7 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({ connectionOb
 
     useEffect(() => connectionObserver
         .onConnectionStatusChanged((newStatus) => setStatus(newStatus)),
-        []);
+        [connectionObserver]);
 
     return <div className={clsx('conn-status', `conn-status--${status}`)}>
         {
@@ -199,7 +199,7 @@ export const UserCount: React.FC<UserCountProps> = ({ userObserver }) => {
 
         return () => subcriptions
             .forEach(unsubscribe => unsubscribe());
-    }, []);
+    }, [userObserver]);
 
     useEffect(() => {
         const update = formatCount(count);
@@ -212,7 +212,7 @@ export const UserCount: React.FC<UserCountProps> = ({ userObserver }) => {
         }, 300);
 
         return () => clearTimeout(timeout);
-    }, [count])
+    }, [count, displayCount]);
 
     return <div
         className={clsx('user-count', { 'user-count--updating': updating })}>
