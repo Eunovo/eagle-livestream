@@ -21,7 +21,7 @@ export const ToggleCamera: React.FC<BroadcastToggleProps> = ({ broadcastService 
 
     return <Tooltip title={on ? 'Turn off camera' : 'Turn on camera'}>
         <IconButton
-            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            className={clsx('icon-btn', { 'icon-btn--on': !on })}
             onClick={() => {
                 if (on) {
                     broadcastService.disableVideo();
@@ -30,7 +30,7 @@ export const ToggleCamera: React.FC<BroadcastToggleProps> = ({ broadcastService 
                 }
             }}
         >
-            {!on
+            {on
                 ? <Videocam />
                 : <VideocamOff />
             }
@@ -43,7 +43,7 @@ export const ToggleMicrophone: React.FC<BroadcastToggleProps> = ({ broadcastServ
 
     return <Tooltip title={on ? 'Turn off mic' : 'Turn on mic'}>
         <IconButton
-            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            className={clsx('icon-btn', { 'icon-btn--on': !on })}
             onClick={() => {
                 if (on) {
                     broadcastService.disableMic();
@@ -52,7 +52,7 @@ export const ToggleMicrophone: React.FC<BroadcastToggleProps> = ({ broadcastServ
                 }
             }}
         >
-            {!on
+            {on
                 ? <Mic />
                 : <MicOff />
             }
@@ -117,7 +117,7 @@ export const ToggleAudio: React.FC<StreamToggleProps> = ({ streamService }) => {
 
     return <Tooltip title={on ? 'Mute audio' : 'Unmute autio'}>
         <IconButton
-            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            className={clsx('icon-btn', { 'icon-btn--on': !on })}
             onClick={() => {
                 if (on) {
                     streamService.disableAudio();
@@ -126,7 +126,7 @@ export const ToggleAudio: React.FC<StreamToggleProps> = ({ streamService }) => {
                 }
             }}
         >
-            {!on
+            {on
                 ? <VolumeUpOutlined />
                 : <VolumeOffOutlined />
             }
@@ -139,7 +139,7 @@ export const ToggleVideo: React.FC<StreamToggleProps> = ({ streamService }) => {
 
     return <Tooltip title={on ? 'Turn off video' : 'Turn on video'}>
         <IconButton
-            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            className={clsx('icon-btn', { 'icon-btn--on': !on })}
             onClick={() => {
                 if (on) {
                     streamService.disableVideo();
@@ -148,7 +148,7 @@ export const ToggleVideo: React.FC<StreamToggleProps> = ({ streamService }) => {
                 }
             }}
         >
-            {!on
+            {on
                 ? <Videocam />
                 : <VideocamOff />
             }
