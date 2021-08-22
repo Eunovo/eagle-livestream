@@ -59,6 +59,7 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
 
     async stop() {
         await this.getClient().leave();
+        this.isLive.push(false);
     }
 
     async destroy() {
