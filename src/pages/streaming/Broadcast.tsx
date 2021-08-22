@@ -51,7 +51,9 @@ export const Broadcast: React.FC = () => {
             <li><ToggleScreenShare broadcastService={serviceRef.current} /></li>
 
             <li style={{ marginLeft: 'auto' }}>
-                
+                <button className='btn-primary'>
+                    Start Broadcast
+                </button>
             </li>
         </ul>
     </div>

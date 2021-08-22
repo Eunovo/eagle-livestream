@@ -1,3 +1,5 @@
+import { Observable } from "../Observable";
+
 export enum Status {
     CONNECTING = 'CONNECTING',
     LIVE = 'LIVE',
@@ -19,6 +21,11 @@ export interface IUserObserver {
  * 
  */
 export interface IBroadcastService {
+    isLive: Observable<boolean>
+    isVideoOn: Observable<boolean>
+    isMicOn: Observable<boolean>
+    isScreenShareOn: Observable<boolean>
+
     start(): Promise<void>
     stop(): Promise<void>
     enableMic(): Promise<void>

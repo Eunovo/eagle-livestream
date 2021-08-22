@@ -5,11 +5,17 @@ import { AgoraService } from "./AgoraService";
 
 export class AgoraBroadcastService extends AgoraService implements IBroadcastService {
 
+    public readonly isLive: Observable<boolean> = new Observable();
+    public readonly isVideoOn: Observable<boolean> = new Observable();
+    public readonly isMicOn: Observable<boolean> = new Observable();
+    public readonly isScreenShareOn: Observable<boolean> = new Observable();
+    public readonly currentVideoTrack = new Observable<
+        IRemoteVideoTrack | ILocalVideoTrack | null>();
+
+
     private localVideoTrack: Promise<ILocalVideoTrack>;
     private localAudioTrack: Promise<ILocalAudioTrack>;
     private localScreenTrack: ILocalVideoTrack | null = null;
-    public readonly currentVideoTrack = new Observable<
-        IRemoteVideoTrack | ILocalVideoTrack | null>();
 
     constructor(
         client: IAgoraRTCClient,
@@ -23,21 +29,25 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
     }
 
     async init() {
+        (await this.localVideoTrack).on('track-ended', () => this.isVideoOn.push(false));
+        (await this.localAudioTrack).on('track-ended', () => this.isMicOn.push(false));
         this.currentVideoTrack.push(await this.localVideoTrack);
     }
 
     async start() {
-        this.getClient().publish([
+        await this.getClient().publish([
             await this.localAudioTrack,
             await this.localVideoTrack
         ]);
+        this.isLive.push(true);
     }
 
-    stop(): Promise<void> {
-        throw new Error("Method not implemented.");
+    async stop() {
+        await this.getClient().leave();
     }
 
     async enableMic() {
+        this.isVideoOn.push(true);
         (await this.localAudioTrack).setEnabled(true);
     }
 
@@ -46,6 +56,7 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
     }
 
     async enableVideo() {
+        this.isVideoOn.push(true);
         (await this.localVideoTrack).setEnabled(true);
     }
 
@@ -71,6 +82,7 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
 
         this.localScreenTrack.on('track-ended', this.unshareScreen.bind(this));
         (await this.localVideoTrack).stop();
+        this.isScreenShareOn.push(true);
         this.currentVideoTrack.push(this.localScreenTrack);
     }
 
@@ -84,6 +96,7 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
             console.log(error);
         }
         this.localScreenTrack.stop();
+        this.isScreenShareOn.push(false);
         this.currentVideoTrack.push(await this.localVideoTrack);
         this.localScreenTrack = null;
     }
