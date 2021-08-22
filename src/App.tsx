@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import { AppStateProvider } from './state/AppContext';
 import { Home } from './pages/home';
 import { Broadcast, Stream } from './pages/streaming';
@@ -8,18 +9,20 @@ import './utilities.css';
 
 function App() {
   return (
-    <AppStateProvider>
-      <Router>
-        <div className="App">
-          <Switch>
-            <Route path='/login'><Login /></Route>
-            <Route path='/broadcast'><Broadcast /></Route>
-            <Route path='/join/:channel'><Stream /></Route>
-            <Route path='/'><Home /></Route>
-          </Switch>
-        </div>
-      </Router>
-    </AppStateProvider>
+    <SnackbarProvider maxSnack={3}>
+      <AppStateProvider>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route path='/login'><Login /></Route>
+              <Route path='/broadcast'><Broadcast /></Route>
+              <Route path='/join/:channel'><Stream /></Route>
+              <Route path='/'><Home /></Route>
+            </Switch>
+          </div>
+        </Router>
+      </AppStateProvider>
+    </SnackbarProvider>
   );
 }
 
