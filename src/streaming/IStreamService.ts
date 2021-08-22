@@ -2,6 +2,7 @@ import { Observable } from "../Observable";
 
 export enum Status {
     CONNECTING = 'CONNECTING',
+    CONNECTED = 'CONNECTED',
     LIVE = 'LIVE',
     DISCONNECTED = 'DISCONNECTED'
 }

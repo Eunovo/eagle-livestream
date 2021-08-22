@@ -1,4 +1,5 @@
-import AgoraRTC, { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import AgoraRTC, { ConnectionState, IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import { Status } from "..";
 import { Observable } from "../../Observable";
 import { IBroadcastService } from "../IStreamService";
 import { AgoraService } from "./AgoraService";
@@ -13,6 +14,7 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
         IRemoteVideoTrack | ILocalVideoTrack | null>();
 
 
+    private hasStarted: boolean = false;
     private localVideoTrack: Promise<ILocalVideoTrack>;
     private localAudioTrack: Promise<ILocalAudioTrack>;
     private localScreenTrack: ILocalVideoTrack | null = null;
@@ -55,11 +57,13 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
             await this.localVideoTrack
         ]);
         this.isLive.push(true);
+        this.hasStarted = true;
     }
 
     async stop() {
         await this.getClient().leave();
         this.isLive.push(false);
+        this.hasStarted = false;
     }
 
     async destroy() {
@@ -126,9 +130,11 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
         this.localScreenTrack = null;
     }
 
-    // protected mapToStatus(status: ConnectionState) {
-    //     const newStatus = super.mapToStatus(status);
-    //     return newStatus;
-    // }
+    protected mapToStatus(status: ConnectionState) {
+        const newStatus = super.mapToStatus(status);
+        if (newStatus !== Status.LIVE) return newStatus;
+        if (this.hasStarted) return newStatus;
+        return Status.CONNECTED;
+    }
 
 }
