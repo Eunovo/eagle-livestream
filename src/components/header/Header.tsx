@@ -1,3 +1,4 @@
+import { PersonOutlined } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../state/AppContext';
 import './header.css';
@@ -5,7 +6,10 @@ import './header.css';
 export const Header = () => {
     const appState = useAppState();
 
-    const profileIcon = <img alt='user' src={''} />;
+    const profileIcon = <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ marginRight: '0.5rem' }}>{appState.user?.email}</div>
+        <PersonOutlined />
+    </div>;
     const loginOrSignup = <nav>
         <ul>
             <li>
