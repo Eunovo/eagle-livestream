@@ -70,16 +70,28 @@ button {
     border: none;
     font-family: inherit;
     font-size: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color ease-in-out 100ms;
 }
 
 .btn-primary {
     color: white;
-    transition: background-color ease-in-out 100ms;
     background-color: var(--primary);
+}
+
+.btn-danger {
+    color: white;
+    background-color: red;
 }
 
 .btn-primary:hover {
     background-color: var(--primary-light);
+}
+
+.btn-danger:hover {
+    background-color: #e61919;
 }
 
 .text-small {
