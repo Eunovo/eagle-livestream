@@ -31,6 +31,7 @@ const ProtectedRoute: React.FC<RouteProps> = ({ path, children, ...props }) => {
   const state = useAppState();
   const location = useLocation();
 
+  if (!state.ready) return <></>;
   if (!state.user) return <Redirect to={`/login?next=${location.pathname}`} />;
 
   return <Route path={path} {...props}>{children}</Route>
