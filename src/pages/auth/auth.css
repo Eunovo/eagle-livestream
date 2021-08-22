@@ -5,6 +5,17 @@
     align-items: center;
 }
 
+.auth h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+}
+
+.auth .logo {
+    object-fit: cover;
+    width: 5rem;
+}
+
 .auth__left {
     display: flex;
     flex-direction: column;

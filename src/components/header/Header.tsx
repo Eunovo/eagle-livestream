@@ -19,7 +19,10 @@ export const Header = () => {
     </nav>
 
     return <header>
-        <h1>Demo</h1>
+        <h1>
+            <img className='logo' src={`${process.env.PUBLIC_URL}/logo.webp`} alt='logo' />
+            Eagle Livestream
+        </h1>
 
         {
             appState.user

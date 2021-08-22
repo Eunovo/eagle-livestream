@@ -17,7 +17,10 @@ export const Login: React.FC = () => {
     return <div className='auth'>
 
         <div className='auth__left'>
-            <h1>Demo</h1>
+            <h1>
+                <img className='logo' src={`${process.env.PUBLIC_URL}/logo.webp`} alt='logo' />
+                Eagle Livestream
+            </h1>
 
             <div className='auth__form'>
                 <h3>Welcome Back!</h3>
