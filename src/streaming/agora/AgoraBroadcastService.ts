@@ -62,21 +62,23 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
     }
 
     async enableMic() {
-        this.isVideoOn.push(true);
-        (await this.localAudioTrack).setEnabled(true);
+        await (await this.localAudioTrack).setEnabled(true);
+        this.isMicOn.push(true);
     }
 
     async disableMic() {
-        (await this.localAudioTrack).setEnabled(false);
+        await (await this.localAudioTrack).setEnabled(false);
+        this.isMicOn.push(false);
     }
 
     async enableVideo() {
+        await (await this.localVideoTrack).setEnabled(true);
         this.isVideoOn.push(true);
-        (await this.localVideoTrack).setEnabled(true);
     }
 
     async disableVideo() {
-        (await this.localVideoTrack).setEnabled(false);
+        await (await this.localVideoTrack).setEnabled(false);
+        this.isVideoOn.push(false);
     }
 
     async shareScreen() {
