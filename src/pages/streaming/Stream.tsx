@@ -1,12 +1,13 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { useEffect, useRef } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { AgoraStreamService, AgoraVideo } from "../../streaming";
 import { UserCount, ConnectionStatus, ToggleAudio, ToggleVideo } from "./components";
 import "./streaming.css";
 
 export const Stream: React.FC = () => {
     const { channel } = useParams<{ channel: string }>();
+    const history = useHistory();
     const serviceRef = useRef(
         new AgoraStreamService(
             AgoraRTC.createClient({ mode: "live", codec: "vp8" }),
@@ -39,7 +40,11 @@ export const Stream: React.FC = () => {
             <li><ToggleVideo streamService={serviceRef.current} /></li>
 
             <li style={{ marginLeft: 'auto' }}>
-                <button className='btn btn-danger'>
+                <button className='btn btn-danger'
+                    onClick={() => {
+                        serviceRef.current.leave();
+                        history.push('/');
+                    }}>
                     Leave
                 </button>
             </li>
