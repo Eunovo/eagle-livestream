@@ -54,9 +54,9 @@ export const Login: React.FC = () => {
             </div>
         </div>
 
-        <div className='auth__right'>
+        {/* <div className='auth__right'>
             <img src={PeoplePodcastImage} alt='people-podcast' />
-        </div>
+        </div> */}
 
     </div>
 }

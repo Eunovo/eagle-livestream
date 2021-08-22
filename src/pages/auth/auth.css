@@ -63,14 +63,14 @@
 
 @media only screen and (min-width: 768px) {
     .auth {
-        justify-content: space-between;
+        /* justify-content: space-between; */
     }
 
     .auth__left {
-        width: 50vw;
+        /* width: 50vw; */
     }
 
     .auth__right {
-        display: block;
+        /* display: block; */
     }
 }
