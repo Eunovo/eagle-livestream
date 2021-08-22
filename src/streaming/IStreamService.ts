@@ -37,6 +37,13 @@ export interface IBroadcastService {
 }
 
 export interface IStreamService {
-    join(id: string): Promise<void>
+    isVideoOn: Observable<boolean>
+    isAudioOn: Observable<boolean>
+
+    join(): Promise<void>
     leave(): Promise<void>
+    enableVideo(): Promise<void>
+    disableVideo(): Promise<void>
+    enableAudio(): Promise<void>
+    disableAudio(): Promise<void>
 }

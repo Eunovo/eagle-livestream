@@ -13,15 +13,15 @@ import {
 import "./streaming.css";
 
 
-const client: IAgoraRTCClient = AgoraRTC
-    .createClient({ mode: "live", codec: "vp8" });
-
-
 export const Broadcast: React.FC = () => {
     const channel = 'test_channel';
     const link = `${process.env.REACT_APP_HOME || ''}/join/${channel}`;
     const serviceRef = useRef(
-        new AgoraBroadcastService(client, channel));
+        new AgoraBroadcastService(
+            AgoraRTC.createClient({ mode: "live", codec: "vp8" }),
+            channel
+        )
+    );
     const user = {};
 
     return <div className='stream-view'>

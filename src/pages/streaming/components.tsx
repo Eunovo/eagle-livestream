@@ -7,16 +7,16 @@ import ScreenShare from '@material-ui/icons/ScreenShare';
 import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
-import { LinkOffOutlined, LinkOutlined, RemoveRedEyeOutlined } from '@material-ui/icons';
-import { IBroadcastService, IConnectionObserver, IUserObserver, Status } from '../../streaming';
+import { LinkOffOutlined, LinkOutlined, RemoveRedEyeOutlined, VolumeOffOutlined, VolumeUpOutlined } from '@material-ui/icons';
+import { IBroadcastService, IConnectionObserver, IStreamService, IUserObserver, Status } from '../../streaming';
 import { useObservable } from '../../Observable';
 import { CopyButton } from '../../components/CopyButton';
 
-export interface ToggleProps {
+export interface BroadcastToggleProps {
     broadcastService: IBroadcastService
 }
 
-export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
+export const ToggleCamera: React.FC<BroadcastToggleProps> = ({ broadcastService }) => {
     const on = useObservable(broadcastService.isVideoOn);
 
     return <Tooltip title={on ? 'Turn off camera' : 'Turn on camera'}>
@@ -38,7 +38,7 @@ export const ToggleCamera: React.FC<ToggleProps> = ({ broadcastService }) => {
     </Tooltip>;
 }
 
-export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) => {
+export const ToggleMicrophone: React.FC<BroadcastToggleProps> = ({ broadcastService }) => {
     const on = useObservable(broadcastService.isMicOn);
 
     return <Tooltip title={on ? 'Turn off mic' : 'Turn on mic'}>
@@ -60,7 +60,7 @@ export const ToggleMicrophone: React.FC<ToggleProps> = ({ broadcastService }) =>
     </Tooltip>;
 }
 
-export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) => {
+export const ToggleScreenShare: React.FC<BroadcastToggleProps> = ({ broadcastService }) => {
     const on = useObservable(broadcastService.isScreenShareOn);
 
     return <Tooltip title={on ? 'Stop presenting screen' : 'Present screen'}>
@@ -82,7 +82,7 @@ export const ToggleScreenShare: React.FC<ToggleProps> = ({ broadcastService }) =
     </Tooltip>;
 }
 
-export const ToggleBroadcast: React.FC<ToggleProps> = ({ broadcastService }) => {
+export const ToggleBroadcast: React.FC<BroadcastToggleProps> = ({ broadcastService }) => {
     const [loading, setLoading] = useState(false);
     const started = useObservable(broadcastService.isLive);
 
@@ -106,6 +106,54 @@ export const ToggleBroadcast: React.FC<ToggleProps> = ({ broadcastService }) => 
             started ? 'Stop' : 'Broadcast'
         }
     </button>
+}
+
+export interface StreamToggleProps {
+    streamService: IStreamService
+}
+
+export const ToggleAudio: React.FC<StreamToggleProps> = ({ streamService }) => {
+    const on = useObservable(streamService.isAudioOn);
+
+    return <Tooltip title={on ? 'Mute audio' : 'Unmute autio'}>
+        <IconButton
+            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            onClick={() => {
+                if (on) {
+                    streamService.disableAudio();
+                } else {
+                    streamService.enableAudio();
+                }
+            }}
+        >
+            {!on
+                ? <VolumeUpOutlined />
+                : <VolumeOffOutlined />
+            }
+        </IconButton>
+    </Tooltip>;
+}
+
+export const ToggleVideo: React.FC<StreamToggleProps> = ({ streamService }) => {
+    const on = useObservable(streamService.isVideoOn);
+
+    return <Tooltip title={on ? 'Turn off video' : 'Turn on video'}>
+        <IconButton
+            className={clsx('icon-btn', { 'icon-btn--on': on })}
+            onClick={() => {
+                if (on) {
+                    streamService.disableVideo();
+                } else {
+                    streamService.enableVideo();
+                }
+            }}
+        >
+            {!on
+                ? <Videocam />
+                : <VideocamOff />
+            }
+        </IconButton>
+    </Tooltip>;
 }
 
 export interface ConnectionStatusProps {
