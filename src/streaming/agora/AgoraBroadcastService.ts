@@ -29,8 +29,23 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
     }
 
     async init() {
-        (await this.localVideoTrack).on('track-ended', () => this.isVideoOn.push(false));
-        (await this.localAudioTrack).on('track-ended', () => this.isMicOn.push(false));
+        try {
+            await this.localVideoTrack
+            this.isVideoOn.push(true);
+            (await this.localVideoTrack)
+                .on('track-ended', () => this.isVideoOn.push(false));
+        } catch (error) {
+            console.log('Counld not start video');
+        }
+
+        try {
+            await this.localAudioTrack
+            this.isMicOn.push(true);
+            (await this.localAudioTrack)
+                .on('track-ended', () => this.isMicOn.push(false));
+        } catch (error) {
+            console.log('Counld not start mic');
+        }
         this.currentVideoTrack.push(await this.localVideoTrack);
     }
 
