@@ -8,20 +8,22 @@ import { useAppStateDispatch } from '../../state/AppContext';
 import './auth.css';
 
 const validationSchema = yup.object({
+    firstName: yup.string().required('First name is required'),
+    lastName: yup.string().required('Last name is required'),
     email: yup.string()
         .email('Must be a valid email')
         .required('Email is required'),
     password: yup.string().required('Password is required')
 })
 
-export const Login: React.FC = () => {
+export const Signup: React.FC = () => {
     const dispatch = useAppStateDispatch();
     const history = useHistory();
     let [next] = useLocationQuery(['next']);
 
     const onSubmit = (values: any) => {
         dispatch && dispatch({
-            type: Actions.LOGIN,
+            type: Actions.SIGNUP,
             payload: values
         });
         history.push(next || '/broadcast');
@@ -36,17 +38,34 @@ export const Login: React.FC = () => {
             </h1>
 
             <div className='auth__form'>
-                <h3>Welcome Back!</h3>
-                <div className='text-small'>
+                <h3>Creat an account</h3>
+                {/* <div className='text-small'>
                     Please log in to your account
-                </div>
+                </div> */}
 
                 <Formik
-                    initialValues={{ email: '', password: '' }}
+                    initialValues={{
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        password: ''
+                    }}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >
                     <Form>
+
+                        <FormLabel>First Name</FormLabel>
+                        <Field name='firstName' />
+                        <div className='input__error'>
+                            <ErrorMessage name='firstName' />
+                        </div>
+
+                        <FormLabel>Last Name</FormLabel>
+                        <Field name='lastName' />
+                        <div className='input__error'>
+                            <ErrorMessage name='lastName' />
+                        </div>
 
                         <FormLabel>Email</FormLabel>
                         <Field name='email' />
@@ -61,15 +80,14 @@ export const Login: React.FC = () => {
                         </div>
 
                         <button className='btn-primary' type='submit'>
-                            Login
+                            Create account
                         </button>
                     </Form>
                 </Formik>
 
                 <div className='text-small auth__form__footer'>
-                    <div>You don't have an account? <Link className='link-primary' to={`/signup?next=${next || '/broadcast'}`}>
-                        Create an account</Link></div>
-                    <div>Forgot password? <Link className='link-primary' to='/forgot-password'>Forgot Password</Link></div>
+                    <div>Already have an account?{' '}
+                        <Link className='link-primary' to={`/login?next=${next || '/broadcast'}`}>Log in</Link></div>
                 </div>
             </div>
         </div>

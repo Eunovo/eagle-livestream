@@ -3,7 +3,7 @@ import { SnackbarProvider } from 'notistack';
 import { AppStateProvider, useAppState } from './state/AppContext';
 import { Home } from './pages/home';
 import { Broadcast, Stream } from './pages/streaming';
-import { Login } from './pages/auth';
+import { Login, Signup } from './pages/auth';
 import './App.css';
 import './utilities.css';
 
@@ -15,6 +15,7 @@ function App() {
           <div className="App">
             <Switch>
               <Route path='/login'><Login /></Route>
+              <Route path='/signup'><Signup /></Route>
               <ProtectedRoute path='/broadcast'><Broadcast /></ProtectedRoute>
               <ProtectedRoute path='/join/:channel'><Stream /></ProtectedRoute>
               <Route path='/'><Home /></Route>

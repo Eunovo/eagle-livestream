@@ -41,7 +41,8 @@
     display: flex;
     flex-direction: column;
     background-color: var(--bg-light);
-    min-width: 20rem;
+    margin-bottom: 10vh;
+    min-width: 18rem;
     min-height: 30rem;
     border-radius: 0.5rem;
     padding: 1rem;
@@ -58,12 +59,19 @@
     flex-grow: 1;
 }
 
+.auth__form label {
+    color: inherit;
+    text-align: left;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
 .auth__form input {
     margin-bottom: 0.5rem;
 }
 
 .auth__form button[type=submit] {
-    margin-top: auto;
+    margin-top: 3rem;
     justify-self: end;
 }
 
@@ -72,16 +80,8 @@
     text-align: left;
 }
 
-@media only screen and (min-width: 768px) {
-    .auth {
-        /* justify-content: space-between; */
-    }
-
-    .auth__left {
-        /* width: 50vw; */
-    }
-
-    .auth__right {
-        /* display: block; */
+@media only screen and (min-width: 480px) {
+    .auth__form {
+        min-width: 25rem;
     }
 }
