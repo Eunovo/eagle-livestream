@@ -7,7 +7,7 @@ export const Header = () => {
     const appState = useAppState();
 
     const profileIcon = <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={{ marginRight: '0.5rem' }}>{appState.user?.email}</div>
+        <div style={{ fontSize: '0.8rem', marginRight: '0.5rem' }}>{appState.user?.email}</div>
         <PersonOutlined />
     </div>;
     const loginOrSignup = <nav>
@@ -25,7 +25,7 @@ export const Header = () => {
     return <header>
         <h1>
             <img className='logo' src={`${process.env.PUBLIC_URL}/logo.webp`} alt='logo' />
-            Eagle Livestream
+            <span>Eagle Livestream</span>
         </h1>
 
         {
