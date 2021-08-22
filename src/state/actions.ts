@@ -1,6 +1,7 @@
 export enum Actions {
     LOGIN = 'login',
-    SIGNUP = 'signup'
+    SIGNUP = 'signup',
+    STATE_READY = 'ready'
 }
 
 export interface IAction {
