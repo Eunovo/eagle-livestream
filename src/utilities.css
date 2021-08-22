@@ -24,6 +24,10 @@
     background-color: var(--bg-color);
 }
 
+.bg-light {
+    background-color: var(--bg-light) !important;
+}
+
 .link-primary {
     color: var(--primary);
     transition: color ease-in-out 100ms;
@@ -80,5 +84,11 @@ button {
 @media screen and (min-width: 768px) {
     :root {
         --page-pd: 1rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        --page-pd: 3rem;
     }
 }
