@@ -1,4 +1,4 @@
-import AgoraRTC, { IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack, UID } from "agora-rtc-sdk-ng";
+import AgoraRTC, { ConnectionState, IAgoraRTCClient, ILocalAudioTrack, ILocalVideoTrack, IRemoteVideoTrack, UID } from "agora-rtc-sdk-ng";
 import { Observable } from "../../Observable";
 import { IBroadcastService } from "../IStreamService";
 import { AgoraService } from "./AgoraService";
@@ -117,5 +117,10 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
         this.currentVideoTrack.push(await this.localVideoTrack);
         this.localScreenTrack = null;
     }
+
+    // protected mapToStatus(status: ConnectionState) {
+    //     const newStatus = super.mapToStatus(status);
+    //     return newStatus;
+    // }
 
 }

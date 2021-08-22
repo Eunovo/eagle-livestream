@@ -28,7 +28,7 @@ export class AgoraService implements IConnectionObserver, IUserObserver {
         return this.mapToStatus(this.client.connectionState);
     }
 
-    private mapToStatus(status: ConnectionState): Status {
+    protected mapToStatus(status: ConnectionState): Status {
         return {
             CONNECTED: Status.LIVE,
             CONNECTING: Status.CONNECTING,
