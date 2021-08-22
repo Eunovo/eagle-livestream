@@ -2,10 +2,12 @@ import { Card, CardContent } from '@material-ui/core';
 import { LinkOutlined, SecurityOutlined, VolumeUpOutlined } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import { Header } from '../../components/header';
+import { useAppState } from '../../state/AppContext';
 import './home.css';
 
 export const Home = () => {
     const history = useHistory();
+    const appState = useAppState();
 
     return <>
         <Header />
@@ -17,8 +19,9 @@ export const Home = () => {
                         Broadcast your events to the World
                     </div>
 
-                    <button className='get-started btn btn-primary' onClick={() => history.push('/login')}>
-                        Get Started
+                    <button className='get-started btn btn-primary'
+                        onClick={() => history.push(appState.user ? '/broadcast' : '/login')}>
+                        {appState.user ? 'Start a Broadcast' : 'Get Started' }
                     </button>
                 </div>
 
