@@ -18,13 +18,12 @@ test('Header shows auth links when user is logged out', () => {
 });
 
 test('Header shows logged in user', () => {
-    render(<AppContext.Provider value={{
-        user: {
-            firstName: 'John',
-            lastName: 'Jonnes',
-            email: 'john4life@gmail.com'
-        }
-    }}>
+    const user = {
+        firstName: 'John',
+        lastName: 'Jonnes',
+        email: 'john4life@gmail.com'
+    };
+    render(<AppContext.Provider value={{ user }}>
         <Header />
     </AppContext.Provider>);
 
@@ -32,5 +31,5 @@ test('Header shows logged in user', () => {
 
     expect(header).not.toHaveTextContent('Login');
     expect(header).not.toHaveTextContent('Signup');
-    expect(screen.getByAltText('user')).toBeInTheDocument();
+    expect(screen.getByText(user.email)).toBeInTheDocument();
 });
