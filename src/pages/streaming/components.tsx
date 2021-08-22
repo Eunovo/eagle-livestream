@@ -7,9 +7,10 @@ import ScreenShare from '@material-ui/icons/ScreenShare';
 import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Videocam from '@material-ui/icons/Videocam';
 import VideocamOff from '@material-ui/icons/VideocamOff';
-import { RemoveRedEyeOutlined } from '@material-ui/icons';
+import { LinkOffOutlined, LinkOutlined, RemoveRedEyeOutlined } from '@material-ui/icons';
 import { IBroadcastService, IConnectionObserver, IUserObserver, Status } from '../../streaming';
 import { useObservable } from '../../Observable';
+import { CopyButton } from '../../components/CopyButton';
 
 export interface ToggleProps {
     broadcastService: IBroadcastService
@@ -170,5 +171,34 @@ export const UserCount: React.FC<UserCountProps> = ({ userObserver }) => {
         <Typography style={{ maxWidth: '2rem', marginRight: '0.5rem' }} noWrap>
             {displayCount}
         </Typography> <RemoveRedEyeOutlined />
+    </div>
+}
+
+export interface LinkContainerProps {
+    link: string
+}
+
+export const LinkContainer: React.FC<LinkContainerProps> = ({ link }) => {
+    const [extended, setExtended] = useState(false);
+
+    return <div className='link-container'>
+        <IconButton color='inherit' onClick={() => setExtended(o => !o)}>
+            {
+                extended
+                ? <LinkOffOutlined />
+                : <LinkOutlined />
+            }
+        </IconButton>
+
+        <div className={clsx('extend', { 'extend--show': extended })}>
+            <Typography
+                style={{ maxWidth: '12rem', marginRight: '0.5rem' }}
+                noWrap
+            >
+                {link}
+            </Typography>
+
+            <CopyButton className='icon-btn' text={link} />
+        </div>
     </div>
 }

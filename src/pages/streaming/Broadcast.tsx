@@ -1,10 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import AgoraRTC, { IAgoraRTCClient } from "agora-rtc-sdk-ng";
-import { Typography } from "@material-ui/core";
-import { CopyButton } from "../../components/CopyButton";
 import { AgoraBroadcastService, AgoraVideo } from "../../streaming";
 import {
     ConnectionStatus,
+    LinkContainer,
     ToggleCamera,
     ToggleMicrophone,
     ToggleScreenShare,
@@ -35,16 +34,7 @@ export const Broadcast: React.FC = () => {
         />
 
         <ul className='container stream-view__menu'>
-            <li className='link-container'>
-                <Typography
-                    style={{ maxWidth: '12rem', marginRight: '0.5rem' }}
-                    noWrap
-                >
-                    {link}
-                </Typography>
-
-                <CopyButton className='icon-btn' text={link} />
-            </li>
+            <li style={{ marginRight: 'auto' }}><LinkContainer link={link} /></li>
 
             <li><ToggleMicrophone broadcastService={serviceRef.current} /></li>
             <li><ToggleCamera broadcastService={serviceRef.current} /></li>
