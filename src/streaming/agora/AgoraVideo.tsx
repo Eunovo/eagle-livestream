@@ -28,7 +28,7 @@ export const AgoraVideo: React.FC<AgoraVideoProps> = ({ className, videoTrack })
                 (track as ILocalVideoTrack).setEnabled(false);
             else track.stop();
         };
-    }, [vidContainer, track, track?.isPlaying]);
+    }, [vidContainer, track]);
 
     return <div ref={vidContainer} className={className}>
 

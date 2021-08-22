@@ -47,7 +47,7 @@ export class AgoraStreamService extends AgoraService implements IStreamService {
     }
 
     async disableVideo() {
-        this.remoteVideoTrack?.stop();
+        this.currentVideoTrack.push(null);
         this.isVideoOn.push(false);
     }
 
