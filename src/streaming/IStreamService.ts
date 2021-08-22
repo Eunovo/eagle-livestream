@@ -26,8 +26,21 @@ export interface IBroadcastService {
     isMicOn: Observable<boolean>
     isScreenShareOn: Observable<boolean>
 
+    /**
+     * Start broadcast
+     */
     start(): Promise<void>
+
+    /**
+     * Stop broadcast
+     */
     stop(): Promise<void>
+
+    /**
+     * Stop broadcast and release all resources
+     */
+    destroy(): Promise<void>
+    
     enableMic(): Promise<void>
     disableMic(): Promise<void>
     enableVideo(): Promise<void>

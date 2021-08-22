@@ -61,6 +61,13 @@ export class AgoraBroadcastService extends AgoraService implements IBroadcastSer
         await this.getClient().leave();
     }
 
+    async destroy() {
+        await this.stop();
+        (await this.localAudioTrack).close();
+        (await this.localVideoTrack).close();
+        this.localScreenTrack?.close();
+    }
+
     async enableMic() {
         await (await this.localAudioTrack).setEnabled(true);
         this.isMicOn.push(true);

@@ -16,6 +16,9 @@ export const Stream: React.FC = () => {
 
     useEffect(() => {
         serviceRef.current.join();
+        return () => {
+            serviceRef.current.leave();
+        }
     }, [serviceRef.current]);
 
     return <div className='stream-view'>
