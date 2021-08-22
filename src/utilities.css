@@ -1,7 +1,8 @@
 :root {
-    --primary: #1e90ff;
-    --primary-light: #2e91ff;
-    --primary-dark: #2e91ff;
+    --primary: #6b19e6;
+    --primary-light: #8947eb;
+    --primary-x-light: 	#e1d1fa;
+    --primary-dark: #6017cf;
     --bg-color: #282c34;
     --bg-light: #3d4148;
     --bg-x-light: #d4d5d6;
@@ -29,12 +30,12 @@
 }
 
 .link-primary {
-    color: var(--primary);
+    color: var(--primary-light);
     transition: color ease-in-out 100ms;
 }
 
 .link-primary:hover {
-    color: var(--primary-light);
+    color: var(--primary-x-light);
 }
 
 input {
@@ -73,7 +74,12 @@ button {
 
 .btn-primary {
     color: white;
+    transition: background-color ease-in-out 100ms;
     background-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
 }
 
 .text-small {
