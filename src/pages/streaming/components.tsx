@@ -103,7 +103,7 @@ export const ToggleBroadcast: React.FC<ToggleProps> = ({ broadcastService }) => 
             color='inherit' size={20}
             style={{ marginRight: '0.5rem' }} />}
         {
-            started ? 'Stop Broadcast' : 'Broadcast'
+            started ? 'Stop' : 'Broadcast'
         }
     </button>
 }
@@ -182,7 +182,8 @@ export const LinkContainer: React.FC<LinkContainerProps> = ({ link }) => {
     const [extended, setExtended] = useState(false);
 
     return <div className='link-container'>
-        <IconButton color='inherit' onClick={() => setExtended(o => !o)}>
+        <IconButton className='icon-btn'
+            color='inherit' onClick={() => setExtended(o => !o)}>
             {
                 extended
                 ? <LinkOffOutlined />

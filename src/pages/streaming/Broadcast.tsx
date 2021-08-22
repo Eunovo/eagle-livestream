@@ -4,6 +4,7 @@ import { AgoraBroadcastService, AgoraVideo } from "../../streaming";
 import {
     ConnectionStatus,
     LinkContainer,
+    ToggleBroadcast,
     ToggleCamera,
     ToggleMicrophone,
     ToggleScreenShare,
@@ -41,9 +42,7 @@ export const Broadcast: React.FC = () => {
             <li><ToggleScreenShare broadcastService={serviceRef.current} /></li>
 
             <li style={{ marginLeft: 'auto' }}>
-                <button className='btn-primary'>
-                    Start Broadcast
-                </button>
+                <ToggleBroadcast broadcastService={serviceRef.current} />
             </li>
         </ul>
     </div>

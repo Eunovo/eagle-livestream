@@ -59,13 +59,18 @@
 
 .extend--show {
     left: 80% !important;
-    width: 17rem !important;
+    width: 15rem !important;
     background-color: var(--bg-color);
 }
 
 .stream-view .icon-btn {
     color: white;
+    font-size: 1rem;
     background-color: var(--bg-color) !important;
+}
+
+.stream-view svg {
+    font-size: inherit;
 }
 
 .stream-view .icon-btn--on {
@@ -78,7 +83,7 @@
     width: fit-content;
     position: fixed;
     top: 2rem;
-    right: 2rem;
+    right: var(--page-pd);
     z-index: 1;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -92,7 +97,7 @@
 .user-count {
     position: fixed;
     top: 2rem;
-    left: 2rem;
+    left: var(--page-pd);
     z-index: 1;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -121,5 +126,9 @@
 
     .extend * {
         display: block !important;
+    }
+
+    .stream-view .icon-btn {
+        font-size: 1.5rem;
     }
 }
